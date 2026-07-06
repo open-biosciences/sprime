@@ -17,9 +17,11 @@ A peer-reviewed predecessor (log-based combined effectiveness–potency score) a
 Zamora et al., *Cancers* 2023, 15(24):5811 (doi:10.3390/cancers15245811).
 
 ## ⚠ Open definition to confirm
-`E_max` convention (fraction 0–1 vs percent 0–100) is **not yet locked** — it sets the absolute S′
-scale and therefore any thresholds. See `emax_as_percent` in `sprime.core` and the reconciliation
-test in `tests/`. Resolve against the reference implementation before tagging a release.
+S′ is computed on the **percent** `E_max` scale (0–100); `emax_as_percent` is an input-unit adapter,
+not a scale switch (fraction input is rescaled to percent internally). The percent scale sets the
+absolute S′ values and therefore the ±2/±4 thresholds. Open item: confirm this matches the reference
+SPrime implementation's output scale before tagging a release. See `emax_as_percent` in `sprime.core`
+and the reconciliation test in `tests/`.
 
 ## Install (editable)
     pip install -e .

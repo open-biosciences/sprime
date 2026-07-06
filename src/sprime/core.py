@@ -3,12 +3,14 @@
 S′ = asinh( (E_max / EC50) * C_ref ), with C_ref a reference concentration (default 1 µM)
 that non-dimensionalizes the E_max/EC50 ratio (standard practice, cf. Michaelis-Menten / Hill).
 
-OPEN DEFINITION — E_max convention
-----------------------------------
-`emax_as_percent` controls whether E_max is supplied as a percent (0-100) or a fraction (0-1).
-This choice sets the absolute S′ scale and therefore any fixed thresholds (e.g. +/-2, +/-4).
-It MUST be reconciled with the reference SPrime implementation before release. The cohort S′
-values reported in the lung study (~7-10) are consistent with the *percent* convention.
+E_max convention (percent) — reconciliation note
+-------------------------------------------------
+S′ is computed on the PERCENT E_max scale (0-100). `emax_as_percent` is an input-unit
+adapter, not a scale switch: pass emax_as_percent=False when your E_max is a fraction (0-1)
+and it is rescaled to percent internally, so both paths yield the same percent-scale S′.
+The percent scale sets the absolute S′ values (cohort ~7-10) and therefore the fixed
+±2/±4 thresholds. OPEN (see sprime-lung-sl concerns.csv C1): confirm this matches the
+reference SPrime implementation's output scale before tagging a release.
 """
 from __future__ import annotations
 import numpy as np
@@ -26,7 +28,7 @@ def s_prime(emax, ec50_uM, c_ref_uM: float = 1.0, emax_as_percent: bool = True):
     """
     emax = np.asarray(emax, dtype=float)
     ec50 = np.asarray(ec50_uM, dtype=float)
-    e = emax if emax_as_percent else emax * 100.0   # normalize convention internally
+    e = emax if emax_as_percent else emax * 100.0   # rescale fraction input to the percent scale S′ is defined on
     arg = (e / ec50) * (c_ref_uM / 1.0)
     return np.arcsinh(arg)
 
