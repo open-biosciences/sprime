@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sprime"
+version = "0.0.1"
+description = "S′ operational potency–efficacy index for high-throughput drug-viability screening"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Open Biosciences / MoCo Makers" }]
+dependencies = ["numpy>=1.21"]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

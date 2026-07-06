@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+title: "sprime: S′ operational potency–efficacy index"
+message: "If you use this software, please cite it and the associated manuscripts."
+authors:
+  - family-names: Zamora
+    given-names: Paul O.
+  - family-names: Zamora
+    given-names: Matthew E.
+  - name: "Open Biosciences / MoCo Makers"
+version: 0.0.1
+license: MIT
+repository-code: "https://github.com/open-biosciences/sprime"
